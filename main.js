@@ -1,31 +1,68 @@
 
 // -------------Jquery-----------
+
+
 $(document).ready(function() {
 
+var desiredBun = JSON.parse(localStorage.getItem("savedNewBun"));
 
+function Bun(cost, quant, flava1, flava2, img){
+    this.cost=cost;
+    this.quant=quant;
+    this.flava1=flava1;
+    this.flava2=flava2;
+    this.img=img;
+}
 
-$(".add-to-cart-button").click(function(event){
-    event.preventDefault();
-    var name=$(product-text).attr("data-name");
-    var price=Number($(product-text).attr("data-price"));
+$("#flavour1").hide();
+$("#flavour2").hide();
 
-    addItemToCart(name, price, 1);
-    console.log(cart);
-});
-
-
+var price,location;
 $("#packs").change(function(){
         if (this.value == "Pack_of_1"){
             $("#singlepack").attr("src", "assets/original(gluten-free).png");
+            $("#price").text("$ 1.00");
+            price=1.00;
+            location="assets/original(gluten-free).png";
+            $("#flavour1").hide();
+            $("#flavour2").hide();
         }
         else if (this.value == "Pack_of_6"){
             $("#singlepack").attr("src", "assets/Pack_of_6.jpg");
+            $("#price").text("$ 6.00");
+            price=6.00;
+            location="assets/Pack_of_6.jpg";
+            $("#flavour1").show();
+            $("#flavour2").show();
         }
         else{
             $("#singlepack").attr("src", "assets/Pack_of_12.jpg");
+            $("#price").text("$ 12.00");
+            price=12.00;
+            location="assets/Pack_of_12.jpg";
+            $("#flavour1").show();
+            $("#flavour2").show();
         }
     })
+
+$(".add-to-cart-button").click(function(){
+    var packs= $("#packs").val();
+    var flav1= $("#flavour1").val();
+    var flav2= $("#flavour2").val();
+    var BunBun=new Bun(price, packs, flav1, flav2, location);
+    localStorage.setItem("savedNewBun", JSON.stringify(BunBun));
+    // console.log(localStorage.getItem("savedNewBun"));
+
 })
+
+
+
+
+
+})
+
+
+// create a constructor
 
 
 // ------------------Javascript---------------------------
