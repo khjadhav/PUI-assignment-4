@@ -23,7 +23,7 @@ var cartArray = JSON.parse(localStorage.getItem("cartArray")) || [];
 for (var i=0; i<cartArray.length; i++){
     var desiredBun = cartArray[i];
     var container = $("<div></div>", {class: 'checkout-product-div'});
-    $("<img />", {class: 'checkout-image-super', src: desiredBun.img, css:{"width":"160px","margin-left":"262px", "margin-right":"30px"}} ).appendTo(container);
+    $("<img />", {'class':"checkout-image-super", src: desiredBun.img} ).appendTo(container);
     // $(".checkout-image-super").;
     console.log($('.checkout-image-super').length);
 
@@ -48,7 +48,7 @@ $("#flavour2").hide();
 
 var price=1.00,location="assets/original(gluten-free).png", number=1, amountOfProduct=1;
 $("#packs").change(function(){
-        if (this.value == "Pack_of_1"){
+        if (this.value == "Pack of 1"){
             $("#singlepack").attr("src", "assets/original(gluten-free).png");
             $("#price").text("$ 1.00");
             price=1.00;
@@ -57,7 +57,7 @@ $("#packs").change(function(){
             $("#flavour1").hide();
             $("#flavour2").hide();
         }
-        else if (this.value == "Pack_of_6"){
+        else if (this.value == "Pack of 6"){
             $("#singlepack").attr("src", "assets/Pack_of_6.jpg");
             $("#price").text("$ 6.00");
             price=6.00;
