@@ -1,23 +1,36 @@
 
-// -------------Jquery-----------
-
-
-$(document).ready(function() {
-
-var desiredBun = JSON.parse(localStorage.getItem("savedNewBun"));
-
-function Bun(cost, quant, flava1, flava2, img){
+function Bun(name, cost, quant, amount, flava1, flava2, img){
+    this.name=name;
     this.cost=cost;
     this.quant=quant;
+    this.amount=amount;
     this.flava1=flava1;
     this.flava2=flava2;
     this.img=img;
 }
 
+$(document).ready(function() {
+
+// localStorage.setItem("cartArray", JSON.stringify([])); //TESTING
+
+var cartArray = JSON.parse(localStorage.getItem("cartArray")) || [];
+
+for (var i=0; i<cartArray.length; i++){
+    var desiredBun = cartArray[i];
+    $(".checkout-image").attr("src",desiredBun.img);
+    $("#title-image").append(desiredBun.name);
+    $("#price-checkout").append("$ "+desiredBun.cost);
+    $("#packs-checkout").append(desiredBun.quant);
+    $("#quant-checkout").append("Quantity: "+desiredBun.amount);
+    $("#flavours-checkout").append("Chosen Flavours: "+desiredBun.flava1);
+    $("#flavours-checkout").append(", "+desiredBun.flava2);
+}
+
 $("#flavour1").hide();
 $("#flavour2").hide();
 
-var price,location;
+
+var price,location, number, amountOfProduct;
 $("#packs").change(function(){
         if (this.value == "Pack_of_1"){
             $("#singlepack").attr("src", "assets/original(gluten-free).png");
@@ -42,110 +55,31 @@ $("#packs").change(function(){
             location="assets/Pack_of_12.jpg";
             $("#flavour1").show();
             $("#flavour2").show();
-        }
-    })
-
-$(".add-to-cart-button").click(function(){
-    var packs= $("#packs").val();
-    var flav1= $("#flavour1").val();
-    var flav2= $("#flavour2").val();
-    var BunBun=new Bun(price, packs, flav1, flav2, location);
-    localStorage.setItem("savedNewBun", JSON.stringify(BunBun));
-    // console.log(localStorage.getItem("savedNewBun"));
-
-})
-
-
-
-
-
-})
-
-
-// create a constructor
-
-
-// ------------------Javascript---------------------------
-// /create an empty array that will hold the shopping cart
-
-var cart=[];
-
-// The cart needs to hold the name, price and count of the items,
-// add these as objects in the array
-var Item= function(name, price, count){
-    this.name=name;
-    this.price=price;
-    this.count=count
-}
-
-//function addItemToCart(name, price, count)
-function addItemToCart(name, price, count){
-    for (var i in cart){
-        if (cart[i].name === name){
-            cart[i].count+= count;
-            return;
-        }
-    }
-    var item=new Item(name, price, count);
-    cart.push(item);
-}
-
-//removeItemFromCart(name)//Removes one item
-function removeItemFromCart(name){
-    for(var i in cart){
-        if(cart[i].name===name){
-            cart[i].count--;
-            return;
-        }
-    }
-}
-
-
-addItemToCart("Apple", 1.22, 2);
-addItemToCart("Pear", 1.72, 3);
-addItemToCart("Apple", 1.22, 5);
-addItemToCart("Apple", 1.22, 3);
-addItemToCart("Banana", 1.00, 3);
-addItemToCart("Car", 34.00, 1);
-addItemToCart("Plush Toy", 5.82, 1);
-addItemToCart("Sticky Notes", 4.00, 3);
-
-//removesAllItemFromCart(name)
-function removeAllItemsFromCart(name){
-    for (var i in cart){
-        if (cart[i].name===name){
-            cart.splice(i,1);
-            break;
             }
-        }
-    }
+        })
+
+// if(desireBun.img=="assets/Pack_of_6.jpg"){
+//     desireBun.img="assets/pack_of_6_checkout.jpg";
+// }
+
+        $(".add-to-cart-button").click(function(){
+            var packs= $("#packs").val();
+            var flav1= $("#flavour1").val();
+            var flav2= $("#flavour2").val();
+            var amountOfProduct=$("#number-input").val();
+            var BunBun=new Bun("Original (Gluten-Free)", price, packs, amountOfProduct, flav1, flav2, location);
+
+            // || means put the things in an Array
+            var existingCartItems=JSON.parse(localStorage.getItem("cartArray")) || [];
+            existingCartItems.push(BunBun);
+            localStorage.setItem("cartArray", JSON.stringify(existingCartItems));
+            console.log(JSON.parse(localStorage.getItem("cartArray")));
+        })
 
 
-function clearCart(){
-    cart=[];
-}
+})
 
 
-// -----------image manipulation-----------
+//create a new variable called exiting cart items
 
-
-
-
-
-//function jsDropDown(imgid, newimg){
-//    document.getElementById(imgid).src="assets"+"/"+newimg+".jpg";
-//}
-
-// console.log(cart.length);
-// console.log(cart);
-// removeAllItemsFromCart("Car");
-// console.log(cart.length);
-// console.log(cart);
-// clearCart();
-// console.log(cart);
-//countCart() -> return total count
-
-//totalCart() -> return total cost
-
-//listCart() -> arrat of Items
 
