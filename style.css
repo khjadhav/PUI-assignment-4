@@ -486,6 +486,9 @@ centre these elements using flexbox*/
     width:20px;
 }
 
+#number-input{
+    margin-bottom: 30px;
+}
 /*--------------------------------ABOUT US PAGE-------------------------------------------*/
 
 /*position the "about us" image on the page*/
@@ -500,4 +503,37 @@ centre these elements using flexbox*/
 .about-us p{
     margin-left: 341px;
     width:50%;
+}
+
+/*-----------------------------*/
+.checkout-cart {
+    padding-top: 124px;
+    margin-left: 260px;
+}
+
+.checkout-product-div{
+    margin-bottom: 60px;
+    max-width: 600px;
+}
+
+.checkout-image-super{
+    float:left;
+    width:160px;
+    height:180px;
+}
+
+.checkout-product-div #product-name{
+/*    float:left;*/
+    font-size: 32px;
+}
+
+.checkout-product-div #product-cost{
+    float:right;
+    font-size: 32px;
+}
+
+.checkout-product-div #delete-item{
+    float:left;
+    font-size: 32px;
+}
 }

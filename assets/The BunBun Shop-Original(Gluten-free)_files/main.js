@@ -23,9 +23,12 @@ for (var i=0; i<cartArray.length; i++){
     console.log($('.checkout-image-super').length);
 
 
+    var deleteButton = $("<button id=delete-item"+i+">Remove Item</button>");
+    deleteButton.appendTo(container);
+    deleteButton.click(function(){console.log("clicked!");$(this).parent().remove();});
 
     $("<h1 id=product-name>"+desiredBun.name+"</h1>").appendTo(container);
-    $("<div id=product-cost>"+"$ "+desiredBun.cost+"</div>").appendTo(container);
+    $("<div id=product-cost>"+"Cost: "+desiredBun.cost+"</div>").appendTo(container);
     $("<div id=product-quant>"+"Chosen Pack: "+desiredBun.quant+"</div>").appendTo(container);
     $("<div id=product-amount>"+"Quantity: "+desiredBun.amount+"</div>").appendTo(container);
     if (desiredBun.flava1!=null){
@@ -36,10 +39,6 @@ for (var i=0; i<cartArray.length; i++){
     }
     if (desiredBun.flava2!=null){
     $("<div id=product-flava2>"+desiredBun.flava2+"</div>").appendTo(container);
-    var deleteButton = $("<button id=delete-item"+i+">Remove Item</button>");
-    deleteButton.appendTo(container);
-    deleteButton.click(function(){console.log("clicked!");$(this).parent().remove();});
-
     }
 
     $(".checkout-cart").append(container);
