@@ -9,7 +9,6 @@ function Bun(name, cost, quant, amount, flava1, flava2, img){
     this.img=img;
 }
 
-
 $(document).ready(function() {
 
 var cartArray = JSON.parse(localStorage.getItem("cartArray")) || [];
@@ -17,22 +16,30 @@ var cartArray = JSON.parse(localStorage.getItem("cartArray")) || [];
 
 for (var i=0; i<cartArray.length; i++){
     var desiredBun = cartArray[i];
-    var container = $("<div></div>",{class:'checkout-product-div', css:{"margin-top":"120"}});
-    $("<img/>",{class:'checkout-image-super',src:desiredBun.img, css:{"width":"160", "margin":"80"}}).appendTo(container);
+    var container = $("<div></div>",{class:'checkout-product-div'});
+    container.appendTo($(".checkout-cart"));
+
+    $("<img/>",{class:'checkout-image-super',src:desiredBun.img, css:{"width":"160px"}}).appendTo(container);
     console.log($('.checkout-image-super').length);
 
 
-    var deleteButton = $("<button id=delete-item"+i+">X</button>");
+    var deleteButton = $("<button id=delete-item"+i+">Remove Item</button>");
     deleteButton.appendTo(container);
-
     deleteButton.click(function(){console.log("clicked!");$(this).parent().remove();});
-    $("<div id=product-name>"+desiredBun.name+"</div>").appendTo(container);
+
+    $("<h1 id=product-name>"+desiredBun.name+"</h1>").appendTo(container);
     $("<div id=product-cost>"+"Cost: "+desiredBun.cost+"</div>").appendTo(container);
     $("<div id=product-quant>"+"Chosen Pack: "+desiredBun.quant+"</div>").appendTo(container);
     $("<div id=product-amount>"+"Quantity: "+desiredBun.amount+"</div>").appendTo(container);
-        $("<div id=additionalFlavours>"+"Additional Flavours"+"</div>").appendTo(container);
+    if (desiredBun.flava1!=null){
+    $("<div id=additionalFlavours>"+"Additional Flavours"+"</div>").appendTo(container);
+    }
+    if (desiredBun.flava1!=null){
     $("<div id=product-flava1>"+desiredBun.flava1+"</div>").appendTo(container);
+    }
+    if (desiredBun.flava2!=null){
     $("<div id=product-flava2>"+desiredBun.flava2+"</div>").appendTo(container);
+    }
 
     $(".checkout-cart").append(container);
 }
@@ -94,8 +101,6 @@ $(".add-to-cart-button").click(function(){
     numForCart+= parseInt($("#number-input").val());
     $("#numForCart").text(numForCart);
 })
-
-
 
 })
 
