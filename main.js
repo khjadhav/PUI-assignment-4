@@ -22,9 +22,8 @@ var cartArray = JSON.parse(localStorage.getItem("cartArray")) || [];
 
 for (var i=0; i<cartArray.length; i++){
     var desiredBun = cartArray[i];
-    var container = $("<div></div>", {class: 'checkout-product-div'});
-    $("<img />", {'class':"checkout-image-super", src: desiredBun.img} ).appendTo(container);
-    // $(".checkout-image-super").;
+    var container = $("<div></div>",{class:'checkout-product-div', css:{"margin-top":"120"}});
+    $("<img/>",{class:'checkout-image-super',src:desiredBun.img, css:{"width":"160", "margin":"80"}}).appendTo(container);
     console.log($('.checkout-image-super').length);
 
 
@@ -32,16 +31,24 @@ for (var i=0; i<cartArray.length; i++){
     deleteButton.appendTo(container);
 
     deleteButton.click(function(){console.log("clicked!");$(this).parent().remove();});
-    container.append(desiredBun.name);
-    container.append("$ "+desiredBun.cost);
-    container.append(desiredBun.quant);
-    container.append("Quantity: "+desiredBun.amount);
-    container.append("Chosen Flavours: "+desiredBun.flava1);
-    container.append(", "+desiredBun.flava2);
+    $("<div id=product-name>"+desiredBun.name+"</div>").appendTo(container);
+    // container.append(desiredBun.name);
+    $("<div id=product-cost>"+"Cost: "+desiredBun.cost+"</div>").appendTo(container);
+    // container.append("$ "+desiredBun.cost);
+    $("<div id=product-quant>"+"Chosen Pack: "+desiredBun.quant+"</div>").appendTo(container);
+    // container.append(desiredBun.quant);
+    $("<div id=product-amount>"+"Quantity: "+desiredBun.amount+"</div>").appendTo(container);
+    // container.append("Quantity: "+desiredBun.amount);
+        $("<div id=additionalFlavours>"+"Additional Flavours"+"</div>").appendTo(container);
+    $("<div id=product-flava1>"+desiredBun.flava1+"</div>").appendTo(container);
+    // container.append("Chosen Flavours: "+desiredBun.flava1);
+    $("<div id=product-flava2>"+desiredBun.flava2+"</div>").appendTo(container);
+    // container.append(", "+desiredBun.flava2);
 
     $(".checkout-cart").append(container);
 }
 
+$("#select-text").hide();
 $("#flavour1").hide();
 $("#flavour2").hide();
 
@@ -54,6 +61,7 @@ $("#packs").change(function(){
             price=1.00;
             location="assets/original(gluten-free).png";
 
+            $('#select-text').hide();
             $("#flavour1").hide();
             $("#flavour2").hide();
         }
@@ -62,6 +70,7 @@ $("#packs").change(function(){
             $("#price").text("$ 6.00");
             price=6.00;
             location="assets/Pack_of_6.jpg";
+            $('#select-text').show();
             $("#flavour1").show();
             $("#flavour2").show();
         }
@@ -70,6 +79,8 @@ $("#packs").change(function(){
             $("#price").text("$ 12.00");
             price=12.00;
             location="assets/Pack_of_12.jpg";
+
+            $('#select-text').show();
             $("#flavour1").show();
             $("#flavour2").show();
             }
