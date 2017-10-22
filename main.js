@@ -12,12 +12,7 @@ function Bun(name, cost, quant, amount, flava1, flava2, img){
 
 $(document).ready(function() {
 
-// localStorage.setItem("cartArray", JSON.stringify([])); //TESTING
-// $​(​".delete-item"​).​click​(​function​()​​​{​​​​​​​​$​(​this​).​parent​().​remove​();});
-
 var cartArray = JSON.parse(localStorage.getItem("cartArray")) || [];
-
-
     $("#numForCart").text(cartArray.length);
 
 for (var i=0; i<cartArray.length; i++){
@@ -32,18 +27,12 @@ for (var i=0; i<cartArray.length; i++){
 
     deleteButton.click(function(){console.log("clicked!");$(this).parent().remove();});
     $("<div id=product-name>"+desiredBun.name+"</div>").appendTo(container);
-    // container.append(desiredBun.name);
     $("<div id=product-cost>"+"Cost: "+desiredBun.cost+"</div>").appendTo(container);
-    // container.append("$ "+desiredBun.cost);
     $("<div id=product-quant>"+"Chosen Pack: "+desiredBun.quant+"</div>").appendTo(container);
-    // container.append(desiredBun.quant);
     $("<div id=product-amount>"+"Quantity: "+desiredBun.amount+"</div>").appendTo(container);
-    // container.append("Quantity: "+desiredBun.amount);
         $("<div id=additionalFlavours>"+"Additional Flavours"+"</div>").appendTo(container);
     $("<div id=product-flava1>"+desiredBun.flava1+"</div>").appendTo(container);
-    // container.append("Chosen Flavours: "+desiredBun.flava1);
     $("<div id=product-flava2>"+desiredBun.flava2+"</div>").appendTo(container);
-    // container.append(", "+desiredBun.flava2);
 
     $(".checkout-cart").append(container);
 }
@@ -86,10 +75,6 @@ $("#packs").change(function(){
             }
         })
 
-// if(desireBun.img=="assets/Pack_of_6.jpg"){
-//     desireBun.img="assets/pack_of_6_checkout.jpg";
-// }
-
 $(".add-to-cart-button").click(function(){
     var packs= $("#packs").val();
     var flav1= $("#flavour1").val();
@@ -113,8 +98,4 @@ $(".add-to-cart-button").click(function(){
 
 
 })
-
-
-//create a new variable called exiting cart items
-
 
